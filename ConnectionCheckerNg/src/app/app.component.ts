@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {Response} from "@angular/http";
+
 import {HttpService} from "./http.service";
+import {Device} from "./device";
 
 @Component({
   selector: 'app-root',
@@ -8,12 +11,15 @@ import {HttpService} from "./http.service";
 })
 export class AppComponent implements OnInit{
 
+  private devices: Device[];
+
   constructor(private httpService: HttpService) {}
 
+  /* Gets called on initialisation and reads the data from the observable json object  */
   ngOnInit() {
     this.httpService.getData()
       .subscribe(
-        (data: any) => console.log(data)
+        (data: Device[]) => this.devices = data
       );
   }
 }
