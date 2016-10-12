@@ -1,4 +1,4 @@
 <h1>Connection Checker Prototype</h1>
 <ul>
-  <li *ngFor="let device of devices">{{device?.name}}</li>
+  <li *ngFor="let device of devices">{{device?.name}} {{device?.lastSeen?.hour}}:{{device?.lastSeen?.minute}}</li>
 </ul>
