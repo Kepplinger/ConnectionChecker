@@ -1,6 +1,5 @@
 export class LocalDateTime {
 
-
   constructor(public nano: number,
               public dayOfYear: number,
               public dayOfWeek: number,
@@ -14,21 +13,12 @@ export class LocalDateTime {
               public chronology: any)
   { }
 
-  public toString = () : string => {
-    return this.dayOfMonth + "." +
-      this.monthValue + "." +
-      this.year + " " +
-      this.hour + ":" +
-      this.minute + ":" +
-      this.second;
-  }
-
-  get timeString(): string{
-    return this.dayOfMonth + "." +
-      this.monthValue + "." +
-      this.year + " " +
-      this.hour + ":" +
-      this.minute + ":" +
-      this.second;
-  }
+  // get timeString(): string{
+  //   return this.dayOfMonth + "." +
+  //     this.monthValue + "." +
+  //     this.year + " " +
+  //     this.hour + ":" +
+  //     this.minute + ":" +
+  //     this.second;
+  // }
 }
