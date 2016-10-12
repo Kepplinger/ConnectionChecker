@@ -8,7 +8,7 @@ export class HttpService {
   constructor(private http: Http) { }
 
   getData() {
-    return this.http.get("http://localhost:8081/ccrestprovider/rs/devices.json")
+    return this.http.get("http://localhost:8081/ccrestprovider/rs/devices")
       .map((response: Response) => response.json());
   }
 }
