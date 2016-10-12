@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings CCRestProvider</title>
+</head>
+<body>
+    <h1>Settings</h1>
+    <form action="http://localhost:8081/ccrestprovider/rs/devices/settings" method="post">
+        <h2>Devices</h2>
+        <h3>Min. Devices:<input type="text" name="mindev"></h3>
+        <h3>Max. Devices:<input type="text" name="maxdev"></h3>
+        <h2>Time</h2>
+        <h3>Avg. Time to next Disconnection:<input type="text" name="avgdisconnection"></h3>
+        <h4>Boundry:<input type="text" name="boundry"></h4>
+        <button type="submit" >Update</button>
+    </form>
+</body>
+</html>

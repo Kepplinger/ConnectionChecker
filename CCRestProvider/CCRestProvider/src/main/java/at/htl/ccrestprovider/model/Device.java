@@ -17,9 +17,9 @@ public class Device {
         this.lastSeen = lastSeen;
     }
 
-    public LocalDateTime getLastSeen() {
+    /*public LocalDateTime getLastSeen() {
         return lastSeen;
-    }
+    }*/
 
     public String getName() {
         return name;
