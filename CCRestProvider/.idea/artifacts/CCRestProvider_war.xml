@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="CCRestProvider:war">
-    <output-path>$PROJECT_DIR$/CCRestProvider/target</output-path>
-    <root id="archive" name="ccrestprovider.war">
-      <element id="artifact" artifact-name="CCRestProvider:war exploded" />
-    </root>
-  </artifact>
-</component>
