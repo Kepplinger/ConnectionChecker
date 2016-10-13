@@ -1,5 +1,2 @@
 <h1>Connection Checker Prototype</h1>
-<ul>
-  <li *ngFor="let device of devices">{{device?.name}} ({{getTimeString(device?.lastSeen)}})</li>
-</ul>
-<button (click)="forceUpdate()">Force Update</button>
+<cc-device-list></cc-device-list>

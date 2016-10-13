@@ -1,0 +1,9 @@
+<ul>
+  <li *ngFor="let device of devices">
+    <div style="display: flex">
+      {{device?.name}} ({{getTimeString(device?.lastSeen)}})
+      <div style="padding-left: 2px">{{device?.status}}</div>
+    </div>
+  </li>
+</ul>
+<button (click)="forceUpdate()">Force Update</button>
