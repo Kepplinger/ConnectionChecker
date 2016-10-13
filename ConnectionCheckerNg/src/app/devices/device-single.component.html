@@ -1,0 +1,4 @@
+<div style="display: flex" [style.color]="getColor()">
+  {{device?.name}} ({{getTimeString(device?.lastSeen)}})
+  <div style="padding-left: 2px">{{device?.status}}</div>
+</div>

@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { HttpService } from "./http.service";
 import { DeviceService } from "./devices/device.service";
 import { DeviceListComponent } from './devices/device-list.component';
+import { DeviceSingleComponent } from './devices/device-single.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DeviceListComponent
+    DeviceListComponent,
+    DeviceSingleComponent
   ],
   imports: [
     BrowserModule,
