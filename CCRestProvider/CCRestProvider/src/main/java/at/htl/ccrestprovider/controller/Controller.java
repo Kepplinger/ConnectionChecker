@@ -3,6 +3,7 @@ package at.htl.ccrestprovider.controller;
 import at.htl.ccrestprovider.model.Device;
 
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalUnit;
 import java.util.*;
 
 /**
@@ -12,11 +13,11 @@ public class Controller {
     static final int INIT_MIN_DEVICES = 1;
     static final int INIT_MAX_DEVICES = 15;
 
-    static final int INIT_AVG_DISCONNECTION = 10*1000; //in ms
+    static final int INIT_AVG_DISCONNECTION = 10; //in sec
     static final int INIT_DISCONNECTION_BOUNDRY = 5000;
 
 
-    private Timer timer;
+    private LocalDateTime lastSeen;
 
     private int minDevices = INIT_MIN_DEVICES;
     private int maxDevices = INIT_MAX_DEVICES;
@@ -25,17 +26,6 @@ public class Controller {
 
 
     private List<Device> devices;
-
-    ///////////////////////////////////////////////////////
-    /// Time scheduling
-    public void StartService(){
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("");
-            }
-        },100,1000);
-    }
 
     private int nextDisconnectionTime(){
         return new Random().nextInt(avgDisconnection+disconnectionBoundry)+disconnectionBoundry;
@@ -48,6 +38,7 @@ public class Controller {
         for (int i = minDevices; i < new Random().nextInt(maxDevices)+minDevices; i++) {
             devices.add(newDevice());
         }
+        lastSeen = LocalDateTime.now();
     }
     private static Controller instance;
     public static Controller getInstance() {
@@ -118,6 +109,27 @@ public class Controller {
     }
 
     public List<Device> getDevices() {
+        System.out.println(String.format("AVG: %d; Bnd: %d; MinDev: %d; MaxDev: %d",avgDisconnection,disconnectionBoundry,minDevices,maxDevices));
+
+
+        int disconnectedDevicesCnt = new Random().nextInt(devices.size());
+
+        for (Device d:devices){
+            d.setLastSeen(LocalDateTime.now());
+        }
+
+        List<Device> disconnectedDevices = new ArrayList<>();
+        while (disconnectedDevices.size()!=disconnectedDevicesCnt){
+            Device next = devices.get(new Random().nextInt(devices.size()));
+            if(!disconnectedDevices.contains(next)){
+                disconnectedDevices.add(next);
+            }
+        }
+
+        for (Device d:disconnectedDevices){
+            d.setLastSeen(LocalDateTime.now().minusSeconds(new Random().nextInt(avgDisconnection+disconnectionBoundry)+disconnectionBoundry));
+        }
+
         return devices;
     }
 

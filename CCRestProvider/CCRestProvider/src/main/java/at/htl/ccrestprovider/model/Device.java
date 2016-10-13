@@ -35,6 +35,6 @@ public class Device {
     }
 
     public Status getStatus() {
-        return Status.values()[Math.abs(new Random().nextInt() % 2)]; //ka ahnung warum monchmoi -1 :D => Math.abs
+        return Status.values()[lastSeen.isBefore(LocalDateTime.now().minusSeconds(3))?1:0]; //ka ahnung warum monchmoi -1 :D => Math.abs
     }
 }
