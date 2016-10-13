@@ -1,31 +1,30 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {Device} from "../classes/device";
 import {FormatService} from "../util/format.service";
 import {LocalDateTime} from "../classes/local-date-time";
 import {DeviceService} from "./device.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'cc-device-list',
   templateUrl: './device-list.component.html' ,
   styles: []
 })
-export class DeviceListComponent implements OnInit{
+export class DeviceListComponent{
 
   private devices: Device[];
 
   constructor(private deviceService: DeviceService) {
-    this.devices = this.deviceService.getDevices();
-    //console.log(this.devices.length);
-    console.log("List");
+    Observable.interval(500)
+      .subscribe((x) => {
+        this.updateDevices();
+        console.log("update");
+      });
   }
 
-  ngOnInit(): void {
-
-  }
-
-  forceUpdate() {
-    this.deviceService.updateDevices();
+  public updateDevices() {
+      this.devices = this.deviceService.getDevices();
   }
 
   /** Returns a formatted date string for the html view */

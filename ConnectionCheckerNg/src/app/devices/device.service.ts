@@ -20,7 +20,7 @@ export class DeviceService {
 
   getDevices() {
     this.updateDevices();
-    console.log(this.devices.length);
+    //console.log(this.devices.length);
     return this.devices;
   }
 
