@@ -34,7 +34,7 @@ public class Device {
         this.name = name;
     }
 
-    public Status getStatus() {
-        return Status.values()[lastSeen.isBefore(LocalDateTime.now().minusSeconds(3))?1:0]; //ka ahnung warum monchmoi -1 :D => Math.abs
+    public boolean getStatus() {
+        return lastSeen.isBefore(LocalDateTime.now().minusSeconds(3)) ? true : false;
     }
 }
