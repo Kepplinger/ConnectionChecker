@@ -21,14 +21,17 @@ public class DeviceEndpoint {
 
     @POST
     @Path("settings")
-    public Response setConfig(@FormParam("avgdisconnection") int avgdisconnection, @FormParam("boundry") int boundry, @FormParam("mindev") int mindevices, @FormParam("maxdev") int maxdevices){
+    public Response setConfig(@FormParam("avgdisconnection") int avgdisconnection,
+                              @FormParam("boundry") int boundry,
+                              @FormParam("devices") int devices) {
+
         Controller.getInstance().setAvgDisconnection(avgdisconnection);
         Controller.getInstance().setDisconnectionBoundry(boundry);
-        Controller.getInstance().setMinDevices(mindevices);
-        Controller.getInstance().setMaxDevices(maxdevices);
+        Controller.getInstance().setMinDevices(devices);
+        Controller.getInstance().setMaxDevices(devices);
 
-        System.out.println(String.format("Settings changed to:\nMin:%d Max:%d AVGDisc:%d Boundry:%d",mindevices,maxdevices,avgdisconnection,boundry));
+        System.out.println(String.format("Settings changed to:\nDevices: %d, AVGDisc: %d, Boundry: %d",devices,avgdisconnection,boundry));
 
-        return Response.status(200).entity(String.format("Settings changed to:\nMin:%d Max:%d AVGDisc:%d Boundry:%d",mindevices,maxdevices,avgdisconnection,boundry)).build();
+        return Response.status(200).entity(String.format("Settings changed to:\nDevices: %d, AVGDisc: %d, Boundry: %d",devices,avgdisconnection,boundry)).build();
     }
 }

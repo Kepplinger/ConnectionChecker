@@ -4,16 +4,32 @@
     <meta charset="UTF-8">
     <title>Settings CCRestProvider</title>
 </head>
-<body>
-    <h1>Settings</h1>
+<body style="margin-top: 5%">
     <form action="http://localhost:8081/ccrestprovider/rs/devices/settings" method="post">
-        <h2>Devices</h2>
-        <h3>Min. Devices:<input type="text" name="mindev"></h3>
-        <h3>Max. Devices:<input type="text" name="maxdev"></h3>
-        <h2>Time</h2>
-        <h3>Avg. Time to next Disconnection:<input type="text" name="avgdisconnection"></h3>
-        <h4>Boundry:<input type="text" name="boundry"></h4>
-        <button type="submit" >Update</button>
+        <div style="display: table; margin: 0 auto">
+            <h1>Set up Dvices</h1>
+            <table>
+                <tr>
+                    <td>Number of Devices:</td>
+                    <td><input style="max-width: 100px" type="number" name="devices"></td>
+                </tr>
+            </table>
+
+            <h3>Time to next Disconnection:</h3>
+            <table>
+                <tr style="margin: 0px">
+                    <td>Avg.:</td>
+                    <td><input style="max-width: 100px" type="number" name="avgdisconnection"> sec</td>
+                </tr>
+                <tr>
+                    <td>Max.: </td>
+                    <td><input style="max-width: 100px" type="number" name="boundry"> sec</td>
+                </tr>
+            </table>
+            <button style="width: 200px; margin-top: 10px" type="submit" >Update</button>
+
+
+        </div>
     </form>
 </body>
 </html>
