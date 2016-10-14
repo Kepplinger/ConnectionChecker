@@ -23,7 +23,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
-            <img alt="Brand" src="./favicon.ico">
+            <img alt="Brand" src="./favicon.ico" height="16px">
           </a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
@@ -51,27 +51,19 @@
     </nav>
 
     <ul class="nav nav-tabs">
-      <li role="presentation" class="active"><a href="#"><i class="fa fa-tachometer" aria-hidden="true"></i> Overview</a></li>
+      <li role="presentation" class="active"><a href="#"><i class="fa fa-tachometer" aria-hidden="true"></i> Overview</span></a></li>
       <li role="presentation"><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a></li>
     </ul>
 
     <div id="detail-container">
       <div class="row">
-        <div class="col-md-3">
-          <div class="panel panel-danger">
-            <h1>25</h1>
-            <h3>Offline</h3>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="panel panel-success">
-            <h1>17</h1>
-            <h3>Online</h3>
-          </div>
+        <div class="col-sx-5 col-sm-4">
+          <h3><span class="label label-danger">Offline <span class="badge">{{offline}}</span></span></h3>
+          <h3><span class="label label-success">Online <span class="badge">{{online}}</span></span></h3>
         </div>
       </div>
     </div>
-    <div id="overview-container" style="display: none;">
+    <div id="overview-container" style="display: block;">
       <div class="row">
         <div class="col-md-3">
           <ul class="nav nav-pills nav-stacked">
