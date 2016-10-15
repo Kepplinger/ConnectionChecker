@@ -1,6 +1,7 @@
-<ul>
-  <li *ngFor="let device of devices">
-    <cc-device-single [device]="device"></cc-device-single>
-  </li>
-</ul>
-<button (click)="updateDevices()">Force Update</button>
+<div class="col-md-2">
+  <div class="list-group">
+    <cc-device-single *ngFor="let device of devices; let i of index" [device]="device"></cc-device-single>
+  </div>
+  <button type="button" class="btn btn-warning" (click)="updateDevices()">Force Update</button>
+</div>
+

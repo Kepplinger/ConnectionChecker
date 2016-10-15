@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 
 import {HttpService} from "../http.service";
 import {Device} from "../classes/device";
+import {LocalDateTime} from "../classes/local-date-time";
 
 @Injectable()
 export class DeviceService {

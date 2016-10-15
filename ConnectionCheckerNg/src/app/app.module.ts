@@ -9,12 +9,20 @@ import { HttpService } from "./http.service";
 import { DeviceService } from "./devices/device.service";
 import { DeviceListComponent } from './devices/device-list.component';
 import { DeviceSingleComponent } from './devices/device-single.component';
+import { NavbarComponent } from './gui/navbar/navbar.component';
+import { ViewComponent } from './gui/view/view.component';
+import { OverviewComponent } from './gui/view/overview/overview.component';
+import { DetailsComponent } from './gui/view/details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeviceListComponent,
-    DeviceSingleComponent
+    DeviceSingleComponent,
+    NavbarComponent,
+    ViewComponent,
+    OverviewComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

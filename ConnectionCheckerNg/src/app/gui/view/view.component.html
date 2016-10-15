@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs">
+  <li role="presentation" [ngClass]="isOverviewActive()?'active':''" (click)="setOverviewActive(true)"><a href="#"><i class="fa fa-tachometer" aria-hidden="true"></i> Overview</a></li>
+  <li role="presentation" [ngClass]="isDetailsViewActive()?'active':''" (click)="setDetailsActive(true)"><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a></li>
+</ul>
+
+<app-overview *ngIf="isOverviewActive()==true"></app-overview>
+
+<app-details *ngIf="isDetailsViewActive()==true"></app-details>

@@ -1,4 +1,10 @@
-<div style="display: flex" [style.color]="getColor()">
-  {{device?.name}} ({{getTimeString(device?.lastSeen)}})
-  <div style="padding-left: 2px">{{device?.status}}</div>
-</div>
+<a href="#" class="list-group-item">
+  <h4 class="list-group-item-heading">{{device?.name}}</h4>
+  <p class="list-group-item-text">{{getTimeString(device?.lastSeen)}}</p>
+  <div *ngIf="device?.status==true">
+    <i class="fa fa-plug" aria-hidden="true" style="color: limegreen;"></i>
+  </div>
+  <div *ngIf="device?.status==false">
+    <i class="fa fa-plug" aria-hidden="true" style="color: darkred;"></i>
+  </div>
+</a>
