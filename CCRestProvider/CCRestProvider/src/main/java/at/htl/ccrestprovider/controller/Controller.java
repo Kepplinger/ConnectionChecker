@@ -16,14 +16,12 @@ public class Controller {
     static final int INIT_AVG_DISCONNECTION = 10; //in sec
     static final int INIT_DISCONNECTION_BOUNDRY = 5000;
 
-
-    private LocalDateTime lastSeen;
+    private static Controller instance;
 
     private int minDevices = INIT_MIN_DEVICES;
     private int maxDevices = INIT_MAX_DEVICES;
     private int avgDisconnection = INIT_AVG_DISCONNECTION;
     private int disconnectionBoundry = INIT_DISCONNECTION_BOUNDRY;
-
 
     private List<Device> devices;
 
@@ -32,15 +30,14 @@ public class Controller {
     }
     /////////////////////////////////////////////////////////////
 
-    //Singleton
     private Controller(){
-        devices = new LinkedList<>();
-        for (int i = minDevices; i < new Random().nextInt(maxDevices)+minDevices; i++) {
-            devices.add(newDevice());
-        }
-        lastSeen = LocalDateTime.now();
+        devices = generateDevices();
     }
-    private static Controller instance;
+
+    /**
+     * Singelton Getter
+     * @return
+     */
     public static Controller getInstance() {
         if(instance==null)
             instance = new Controller();
@@ -48,7 +45,7 @@ public class Controller {
     }
 
     /**
-     * Device Generator
+     * Generates a new random device.
      */
     private Device newDevice(){
         Random r = new Random();
@@ -108,6 +105,17 @@ public class Controller {
         this.disconnectionBoundry = disconnectionBoundry;
     }
 
+    /**
+     * Generates a new list of devices and saves them into the devices list.
+     */
+    public void createNewDeviceList(){
+        devices = generateDevices();
+    }
+
+    /**
+     * Returns all devices and simulates disconnections.
+     * @return
+     */
     public List<Device> getDevices() {
         System.out.println(String.format("AVG: %d; Bnd: %d; MinDev: %d; MaxDev: %d",avgDisconnection,disconnectionBoundry,minDevices,maxDevices));
 
@@ -133,7 +141,18 @@ public class Controller {
         return devices;
     }
 
-    public static void setInstance(Controller instance) {
-        Controller.instance = instance;
+    /**
+     * Generates a new list of devices.
+     * @return
+     */
+    private List<Device> generateDevices() {
+
+        List<Device> devices = new LinkedList<>();
+
+        for (int i = minDevices; i < new Random().nextInt(maxDevices)+minDevices; i++) {
+            devices.add(newDevice());
+        }
+
+        return devices;
     }
 }

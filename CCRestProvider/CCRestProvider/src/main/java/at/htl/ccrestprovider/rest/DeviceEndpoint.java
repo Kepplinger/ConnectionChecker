@@ -29,6 +29,7 @@ public class DeviceEndpoint {
         Controller.getInstance().setDisconnectionBoundry(boundry);
         Controller.getInstance().setMinDevices(devices);
         Controller.getInstance().setMaxDevices(devices);
+        Controller.getInstance().createNewDeviceList();
 
         System.out.println(String.format("Settings changed to:\nDevices: %d, AVGDisc: %d, Boundry: %d",devices,avgdisconnection,boundry));
 
