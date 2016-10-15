@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpService} from "../../http.service";
 
 @Component({
   selector: 'app-view',
@@ -7,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewComponent implements OnInit {
 
-  private overviewActive:boolean;
-  private detailsActive:boolean = true;
+  private overviewActive : boolean;
+  private detailsActive : boolean;
 
+  private lastUpdate;
 
-  constructor() { }
+  constructor(private httpService:HttpService) {
+    this.overviewActive = true; /*Overview page is shown at Startup*/
+    httpService.lastUpdate.subscribe(date=>this.lastUpdate = date);
+  }
 
   ngOnInit() {
   }

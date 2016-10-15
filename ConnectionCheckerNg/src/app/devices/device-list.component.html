@@ -1,7 +1,8 @@
-<div class="col-md-2">
-  <div class="list-group">
-    <cc-device-single *ngFor="let device of devices; let i of index" [device]="device"></cc-device-single>
-  </div>
-  <button type="button" class="btn btn-warning" (click)="updateDevices()">Force Update</button>
+<div class="list-group" *ngIf="devices != null">
+  <a *ngFor="let device of devices; let i = index"  href="#detail-container" [ngClass]="i==0?'list-group-item active':'list-group-item'">
+    <h4 class="list-group-item-heading">{{device?.name}}</h4>
+    <p class="list-group-item-text">{{getTimeString(device?.lastSeen)}} <i class="fa fa-plug" aria-hidden="true" [style.color]="getColor(device)"></i>
+    </p>
+  </a>
 </div>
-
+<button type="button" class="btn btn-warning btn-block" (click)="updateDevices()"><i class="fa fa-refresh" aria-hidden="true"></i> Force Update</button>
