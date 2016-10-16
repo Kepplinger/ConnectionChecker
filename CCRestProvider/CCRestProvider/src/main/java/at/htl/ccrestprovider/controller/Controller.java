@@ -25,21 +25,22 @@ public class Controller {
 
     private List<Device> devices;
 
-    private int nextDisconnectionTime(){
-        return new Random().nextInt(avgDisconnection+disconnectionBoundry)+disconnectionBoundry;
+    private int nextDisconnectionTime() {
+        return new Random().nextInt(avgDisconnection + disconnectionBoundry) + disconnectionBoundry;
     }
     /////////////////////////////////////////////////////////////
 
-    private Controller(){
+    private Controller() {
         devices = generateDevices();
     }
 
     /**
      * Singelton Getter
+     *
      * @return
      */
     public static Controller getInstance() {
-        if(instance==null)
+        if (instance == null)
             instance = new Controller();
         return instance;
     }
@@ -47,11 +48,11 @@ public class Controller {
     /**
      * Generates a new random device.
      */
-    private Device newDevice(){
+    private Device newDevice() {
         Random r = new Random();
 
         String name = "";
-        switch (r.nextInt(3)){
+        switch (r.nextInt(3)) {
             case 0:
                 name += "Samsung Galaxy S";
                 break;
@@ -62,9 +63,9 @@ public class Controller {
                 name += "Nexus ";
                 break;
         }
-        name += r.nextInt(9)+1;
+        name += r.nextInt(9) + 1;
 
-        return new Device(name, LocalDateTime.now().minusSeconds(r.nextInt(60000)+15));
+        return new Device(name, LocalDateTime.now().minusSeconds(r.nextInt(60000) + 15));
     }
 
 
@@ -108,34 +109,35 @@ public class Controller {
     /**
      * Generates a new list of devices and saves them into the devices list.
      */
-    public void createNewDeviceList(){
+    public void createNewDeviceList() {
         devices = generateDevices();
     }
 
     /**
      * Returns all devices and simulates disconnections.
+     *
      * @return
      */
     public List<Device> getDevices() {
-        System.out.println(String.format("AVG: %d; Bnd: %d; MinDev: %d; MaxDev: %d",avgDisconnection,disconnectionBoundry,minDevices,maxDevices));
+        System.out.println(String.format("AVG: %d; Bnd: %d; MinDev: %d; MaxDev: %d", avgDisconnection, disconnectionBoundry, minDevices, maxDevices));
 
-
+        System.out.println("Devices: " + devices.size());
         int disconnectedDevicesCnt = new Random().nextInt(devices.size());
 
-        for (Device d:devices){
+        for (Device d : devices) {
             d.setLastSeen(LocalDateTime.now());
         }
 
         List<Device> disconnectedDevices = new ArrayList<>();
-        while (disconnectedDevices.size()!=disconnectedDevicesCnt){
+        while (disconnectedDevices.size() != disconnectedDevicesCnt) {
             Device next = devices.get(new Random().nextInt(devices.size()));
-            if(!disconnectedDevices.contains(next)){
+            if (!disconnectedDevices.contains(next)) {
                 disconnectedDevices.add(next);
             }
         }
 
-        for (Device d:disconnectedDevices){
-            d.setLastSeen(LocalDateTime.now().minusSeconds(new Random().nextInt(avgDisconnection+disconnectionBoundry)+disconnectionBoundry));
+        for (Device d : disconnectedDevices) {
+            d.setLastSeen(LocalDateTime.now().minusSeconds(new Random().nextInt(avgDisconnection + disconnectionBoundry) + disconnectionBoundry));
         }
 
         return devices;
@@ -143,16 +145,24 @@ public class Controller {
 
     /**
      * Generates a new list of devices.
+     *
      * @return
      */
     private List<Device> generateDevices() {
 
         List<Device> devices = new LinkedList<>();
 
-        for (int i = minDevices; i < new Random().nextInt(maxDevices)+minDevices; i++) {
-            devices.add(newDevice());
+        if (maxDevices > minDevices) {
+            for (int i = 0; i < new Random().nextInt(maxDevices - minDevices) + minDevices; i++) {
+                devices.add(newDevice());
+            }
+        } else {
+            for (int i = 0; i < minDevices; i++) {
+                devices.add(newDevice());
+            }
         }
 
+        System.out.println("Devices: " + devices.size());
         return devices;
     }
 }
