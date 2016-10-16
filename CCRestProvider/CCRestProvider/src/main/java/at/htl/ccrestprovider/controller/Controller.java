@@ -3,35 +3,33 @@ package at.htl.ccrestprovider.controller;
 import at.htl.ccrestprovider.model.Device;
 
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalUnit;
 import java.util.*;
 
 /**
  * Created by Andreas on 12.10.2016.
  */
 public class Controller {
-    static final int INIT_MIN_DEVICES = 1;
-    static final int INIT_MAX_DEVICES = 15;
+    static final int INIT_MIN_DEVICES = 5;
+    static final int INIT_MAX_DEVICES = 25;
 
-    static final int INIT_AVG_DISCONNECTION = 10; //in sec
+    static final int INIT_AVG_DISCONNECTION = 60;
     static final int INIT_DISCONNECTION_BOUNDRY = 5000;
 
     private static Controller instance;
 
-    private int minDevices = INIT_MIN_DEVICES;
-    private int maxDevices = INIT_MAX_DEVICES;
-    private int avgDisconnection = INIT_AVG_DISCONNECTION;
-    private int disconnectionBoundry = INIT_DISCONNECTION_BOUNDRY;
+    private int minDevices = INIT_MIN_DEVICES;          //minimum number of devices which will be created
+    private int maxDevices = INIT_MAX_DEVICES;          //maximum number of devices which will be created
+    private int avgDisconnection = INIT_AVG_DISCONNECTION;          //average time at which a device disconnects (in seconds)
+    private int disconnectionBoundry = INIT_DISCONNECTION_BOUNDRY;  //maximum time at which a device disconnects (in seconds)
 
     private List<Device> devices;
+    private Random random;
 
-    private int nextDisconnectionTime() {
-        return new Random().nextInt(avgDisconnection + disconnectionBoundry) + disconnectionBoundry;
-    }
     /////////////////////////////////////////////////////////////
 
     private Controller() {
         devices = generateDevices();
+        random = new Random();
     }
 
     /**
@@ -46,7 +44,7 @@ public class Controller {
     }
 
     /**
-     * Generates a new random device.
+     * Generates a new random device with a random name.
      */
     private Device newDevice() {
         Random r = new Random();
@@ -65,15 +63,13 @@ public class Controller {
         }
         name += r.nextInt(9) + 1;
 
-        return new Device(name, LocalDateTime.now().minusSeconds(r.nextInt(60000) + 15));
+        return new Device(name);
     }
 
 
-    //################################################################################################################
-    //### GETTER UND SETTER
-    //###################################################################
-
-
+    /*
+     * GETTER and SETTER
+     */
     public int getMinDevices() {
         return minDevices;
     }
@@ -103,7 +99,11 @@ public class Controller {
     }
 
     public void setDisconnectionBoundry(int disconnectionBoundry) {
-        this.disconnectionBoundry = disconnectionBoundry;
+        if (disconnectionBoundry > avgDisconnection) {
+            this.disconnectionBoundry = disconnectionBoundry;
+        } else {
+            this.disconnectionBoundry = avgDisconnection;
+        }
     }
 
     /**
@@ -119,25 +119,37 @@ public class Controller {
      * @return
      */
     public List<Device> getDevices() {
-        System.out.println(String.format("AVG: %d; Bnd: %d; MinDev: %d; MaxDev: %d", avgDisconnection, disconnectionBoundry, minDevices, maxDevices));
 
-        System.out.println("Devices: " + devices.size());
-        int disconnectedDevicesCnt = new Random().nextInt(devices.size());
+        int firstRand;
+        int secondRand;
 
-        for (Device d : devices) {
-            d.setLastSeen(LocalDateTime.now());
-        }
+        for (Device device : devices) {
 
-        List<Device> disconnectedDevices = new ArrayList<>();
-        while (disconnectedDevices.size() != disconnectedDevicesCnt) {
-            Device next = devices.get(new Random().nextInt(devices.size()));
-            if (!disconnectedDevices.contains(next)) {
-                disconnectedDevices.add(next);
+            // Two random integers are generated
+            firstRand = random.nextInt(getAvgDisconnection()) + 1;
+            secondRand = random.nextInt(getAvgDisconnection()) + 1;
+
+            if (device.getStatus() == true){
+
+                //Stay connected if time since initial connection hasn't exceeded the calculated value or boundry.
+                if (device.getConnectedAt().plusSeconds(firstRand * getAvgDisconnection() - secondRand).isAfter(LocalDateTime.now())
+                        && device.getConnectedAt().plusSeconds(getDisconnectionBoundry()).isAfter(LocalDateTime.now())) {
+                    device.setLastSeen(LocalDateTime.now());
+                }
+                else {
+                    device.setStatus(false);
+                }
+
+            }else {
+
+                //Reconnect device if enough time has past.
+                if (device.getLastSeen().plusSeconds(getAvgDisconnection() + firstRand - secondRand).isBefore(LocalDateTime.now())
+                        || device.getLastSeen().plusSeconds(getDisconnectionBoundry()).isBefore(LocalDateTime.now())) {
+                    device.setLastSeen(LocalDateTime.now());
+                    device.setConnectedAt(LocalDateTime.now());
+                    device.setStatus(true);
+                }
             }
-        }
-
-        for (Device d : disconnectedDevices) {
-            d.setLastSeen(LocalDateTime.now().minusSeconds(new Random().nextInt(avgDisconnection + disconnectionBoundry) + disconnectionBoundry));
         }
 
         return devices;

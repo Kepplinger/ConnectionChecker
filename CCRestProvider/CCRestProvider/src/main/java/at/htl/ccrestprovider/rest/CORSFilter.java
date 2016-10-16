@@ -8,7 +8,7 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.ext.Provider;
 
 /**
- * Created by kepplinger on 12.10.16.
+ * This class modifies the HTTP header to allow Cross Origin Resource Sharing.
  */
 @Provider
 public class CORSFilter implements ContainerResponseFilter {
