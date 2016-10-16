@@ -13,14 +13,14 @@ public class Controller {
     static final int INIT_MAX_DEVICES = 25;
 
     static final int INIT_AVG_DISCONNECTION = 60;
-    static final int INIT_DISCONNECTION_BOUNDRY = 5000;
+    static final int INIT_DISCONNECTION_BOUNDARY = 5000;
 
     private static Controller instance;
 
     private int minDevices = INIT_MIN_DEVICES;          //minimum number of devices which will be created
     private int maxDevices = INIT_MAX_DEVICES;          //maximum number of devices which will be created
     private int avgDisconnection = INIT_AVG_DISCONNECTION;          //average time at which a device disconnects (in seconds)
-    private int disconnectionBoundry = INIT_DISCONNECTION_BOUNDRY;  //maximum time at which a device disconnects (in seconds)
+    private int disconnectionBoundary = INIT_DISCONNECTION_BOUNDARY;  //maximum time at which a device disconnects (in seconds)
 
     private List<Device> devices;
     private Random random;
@@ -94,15 +94,15 @@ public class Controller {
         this.avgDisconnection = avgDisconnection;
     }
 
-    public int getDisconnectionBoundry() {
-        return disconnectionBoundry;
+    public int getDisconnectionBoundary() {
+        return disconnectionBoundary;
     }
 
-    public void setDisconnectionBoundry(int disconnectionBoundry) {
-        if (disconnectionBoundry > avgDisconnection) {
-            this.disconnectionBoundry = disconnectionBoundry;
+    public void setDisconnectionBoundary(int disconnectionBoundary) {
+        if (disconnectionBoundary > avgDisconnection) {
+            this.disconnectionBoundary = disconnectionBoundary;
         } else {
-            this.disconnectionBoundry = avgDisconnection;
+            this.disconnectionBoundary = avgDisconnection;
         }
     }
 
@@ -131,9 +131,9 @@ public class Controller {
 
             if (device.getStatus() == true){
 
-                //Stay connected if time since initial connection hasn't exceeded the calculated value or boundry.
+                //Stay connected if time since initial connection hasn't exceeded the calculated value or boundary.
                 if (device.getConnectedAt().plusSeconds(firstRand * getAvgDisconnection() - secondRand).isAfter(LocalDateTime.now())
-                        && device.getConnectedAt().plusSeconds(getDisconnectionBoundry()).isAfter(LocalDateTime.now())) {
+                        && device.getConnectedAt().plusSeconds(getDisconnectionBoundary()).isAfter(LocalDateTime.now())) {
                     device.setLastSeen(LocalDateTime.now());
                 }
                 else {
@@ -144,7 +144,7 @@ public class Controller {
 
                 //Reconnect device if enough time has past.
                 if (device.getLastSeen().plusSeconds(getAvgDisconnection() + firstRand - secondRand).isBefore(LocalDateTime.now())
-                        || device.getLastSeen().plusSeconds(getDisconnectionBoundry()).isBefore(LocalDateTime.now())) {
+                        || device.getLastSeen().plusSeconds(getDisconnectionBoundary()).isBefore(LocalDateTime.now())) {
                     device.setLastSeen(LocalDateTime.now());
                     device.setConnectedAt(LocalDateTime.now());
                     device.setStatus(true);

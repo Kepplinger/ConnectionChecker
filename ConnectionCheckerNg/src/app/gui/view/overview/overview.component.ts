@@ -28,6 +28,7 @@ export class OverviewComponent implements OnInit {
     this.devices = this.deviceService.getDevices();
     this.offline = this.deviceService.getOfflineDevices();
     this.online = this.deviceService.getOnlineDevices();
+    this.loadGoogleChart();
   }
 
   ngOnInit() {
@@ -42,21 +43,19 @@ export class OverviewComponent implements OnInit {
   drawChart () {
     // Create the data table.
     var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Topping');
-    data.addColumn('number', 'Slices');
+    data.addColumn('string', 'Device');
+    data.addColumn('number', 'Status');
     data.addRows([
-      ['Mushrooms', 3],
-      ['Onions', 1],
-      ['Olives', 1],
-      ['Zucchini', 1],
-      ['Pepperoni', 2]
+      ['Online', this.online],
+      ['Offline', this.offline]
     ]);
 
-
     // Set chart options
-    var options = {'title':'How Much Pizza I Ate Last Night',
-      'width':400,
-      'height':300};
+    var options = {'title':'Device Status Overview',
+      'width':600,
+      'height':450,
+      'colors': ['#5cb85c','#d9534f']
+    };
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
