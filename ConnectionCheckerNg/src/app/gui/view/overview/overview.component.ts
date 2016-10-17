@@ -28,7 +28,7 @@ export class OverviewComponent implements OnInit {
     this.devices = this.deviceService.getDevices();
     this.offline = this.deviceService.getOfflineDevices();
     this.online = this.deviceService.getOnlineDevices();
-    this.loadGoogleChart();
+    this.drawChart();
   }
 
   ngOnInit() {
@@ -41,6 +41,9 @@ export class OverviewComponent implements OnInit {
   }
 
   drawChart () {
+    if(google!=null && google.visualization != null){
+
+
     // Create the data table.
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Device');
@@ -51,16 +54,15 @@ export class OverviewComponent implements OnInit {
     ]);
 
     // Set chart options
-    var options = {'title':'Device Status Overview',
-      'width':600,
-      'height':450,
+    var options = {
       'colors': ['#5cb85c','#d9534f']
     };
 
+    if(document.getElementById('chart_div')!=null){
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-
+    chart.draw(data, options);}
+    }
   }
 
   checkloaded(): boolean {
