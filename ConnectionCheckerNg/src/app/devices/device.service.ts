@@ -9,6 +9,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 export class DeviceService {
 
   private devices: Device[];
+  private lastUpdate: Date;
 
   constructor(private httpService: HttpService) { }
 
@@ -18,6 +19,7 @@ export class DeviceService {
       .subscribe(
         (data: Device[]) => this.devices = data
       );
+    this.lastUpdate = new Date();
   }
 
   getDevices() {
@@ -44,6 +46,10 @@ export class DeviceService {
       return this.devices.length-this.getOnlineDevices();
     else
       return 0;
+  }
+
+  getLastUpdate():Date{
+    return this.lastUpdate;
   }
 
 }

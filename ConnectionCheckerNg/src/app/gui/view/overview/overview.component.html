@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="row">
       <div class="col-md-12">
-        <h3>
+        <h3 style="text-align: center">
           <span class="label label-primary">Total <span class="badge">{{online+offline}}</span></span>
           <span class="label label-danger">Offline <span class="badge">{{offline}}</span></span>
           <span class="label label-success">Online <span class="badge">{{online}}</span></span>
@@ -10,9 +10,37 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3 panel panel-default">
-        <h3>Online/Offline</h3>
-        <div id="chart_div"></div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="col-md-12 panel panel-default">
+              <h3>Online/Offline Average</h3>
+              <div id="onof_chart"><img src="../../loading.gif"></div>
+            </div>
+          </div>
+          <div class="col-md-9 panel panel-default">
+            <div class="col-md-12">
+              <div class="row">
+                <h3>Online/Offline History
+                  <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-cog" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Show last 5min</a></li>
+                      <li><a href="#">Show last 1 hour</a></li>
+                      <li><a href="#">Show last 7 days</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">Show all</a></li>
+                    </ul>
+                  </div>
+                </h3>
+
+              </div>
+              <div id="history_onof_chart"><img src="../../loading.gif"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
