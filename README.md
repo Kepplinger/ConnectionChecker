@@ -1,9 +1,6 @@
 #**CC - Connection Checker**
 ##Overview
-The aim of this project is to show the State (*Online* and *Offline*) of Android Devices and illustrate these states in diagrams.
-
-####Sidefact:
- - Info is recieved  by a *REST* service in *JSON*
+This Angular Project shows Device Informations from a REST Service. This data is shown in different diagrams.
 
 >### **Used Technologies**
 >
