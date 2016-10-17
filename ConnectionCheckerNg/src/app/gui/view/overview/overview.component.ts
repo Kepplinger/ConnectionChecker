@@ -34,7 +34,7 @@ export class OverviewComponent implements OnInit {
 
     var item = new HistoryItem(this.deviceService.getLastUpdate(), [this.offline, this.online]);
     this.history_onof.push(item);
-    this.drawCharts();
+    this.loadGoogleChart();
   }
 
   ngOnInit() {
@@ -42,11 +42,12 @@ export class OverviewComponent implements OnInit {
   }
 
   loadGoogleChart() {
-    google.charts.load('current', {'packages': ['corechart'], 'callback': this.drawCharts()});
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(() => this.drawCharts());
   }
 
   drawCharts() {
-    if (google != null && google.visualization != null) {
+    if (google != null && google.visualization != null && this.devices != null) {
       this.drawPieChart();
       this.drawLineChart();
     }
