@@ -13,6 +13,8 @@ declare var google: any;
 })
 export class OverviewComponent implements OnInit {
 
+  private static googleLoaded: boolean;
+
   private devices: Device[];
   private offline: number;
   private online: number;
@@ -42,7 +44,10 @@ export class OverviewComponent implements OnInit {
   }
 
   loadGoogleChart() {
-    google.charts.load('current', {'packages': ['corechart']});
+    if  (!OverviewComponent.googleLoaded) {
+      OverviewComponent.googleLoaded = true;
+      google.charts.load('current', {'packages': ['corechart']});
+    }
     google.charts.setOnLoadCallback(() => this.drawCharts());
   }
 
