@@ -1,9 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 import {Device} from "../classes/device";
 import {DeviceService} from "./device.service";
 import {Observable} from "rxjs";
-import {Input} from "@angular/core/src/metadata/directives";
 import {FormatService} from "../util/format.service";
 import {LocalDateTime} from "../classes/local-date-time";
 
@@ -14,10 +13,9 @@ import {LocalDateTime} from "../classes/local-date-time";
 })
 export class DeviceListComponent{
 
+  @Output() selectedDevice = new EventEmitter<Device>();
+  private selectedIndex = 0;
   private devices: Device[];
-
-  @Input("device")
-  private selectedDevice: Device;
 
   constructor(private deviceService: DeviceService) {
     Observable.interval(1000)
@@ -31,6 +29,10 @@ export class DeviceListComponent{
       this.devices = this.deviceService.getDevices();
   }
 
+  public onSelect(device: Device, index: number) {
+    this.selectedDevice.emit(device);
+    this.selectedIndex = index;
+  }
 
   /** Returns a formatted date string for the html view */
   getTimeString(date: LocalDateTime) :string {

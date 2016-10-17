@@ -1,5 +1,6 @@
 <div class="list-group" *ngIf="devices != null">
-  <a *ngFor="let device of devices; let i = index"  href="#detail-container" [ngClass]="i==0?'list-group-item active':'list-group-item'">
+  <a *ngFor="let device of devices; let i = index"  href="#detail-container"
+     [ngClass]="i==selectedIndex?'list-group-item active':'list-group-item'" (click)="onSelect(device, i)">
     <h4 class="list-group-item-heading">{{device?.name}}</h4>
     <p class="list-group-item-text">{{getTimeString(device?.lastSeen)}} <i class="fa fa-plug" aria-hidden="true" [style.color]="getColor(device)"></i>
     </p>

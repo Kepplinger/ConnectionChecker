@@ -12,13 +12,4 @@ export class LocalDateTime {
               public monthValue: number,
               public chronology: any)
   { }
-
-  // get timeString(): string{
-  //   return this.dayOfMonth + "." +
-  //     this.monthValue + "." +
-  //     this.year + " " +
-  //     this.hour + ":" +
-  //     this.minute + ":" +
-  //     this.second;
-  // }
 }

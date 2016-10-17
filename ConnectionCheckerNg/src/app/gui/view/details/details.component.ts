@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {Device} from "../../../classes/device";
 
 @Component({
-  selector: 'app-details',
+  selector: 'cc-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
 
-  constructor() { }
+  private selectedDevice: Device;
 
-  ngOnInit() {
+  constructor() {
+  }
+
+  public setSelectedDevice(device: Device){
+    if (device != null) {
+      this.selectedDevice = device;
+    }
+  }
+
+  public getSelectedDevice(): Device {
+    return this.selectedDevice;
   }
 
 }

@@ -13,19 +13,15 @@ public class Controller {
     static final int INIT_MAX_DEVICES = 25;
 
     static final int INIT_AVG_DISCONNECTION = 60;
-    static final int INIT_DISCONNECTION_BOUNDARY = 5000;
 
     private static Controller instance;
 
     private int minDevices = INIT_MIN_DEVICES;          //minimum number of devices which will be created
     private int maxDevices = INIT_MAX_DEVICES;          //maximum number of devices which will be created
     private int avgDisconnection = INIT_AVG_DISCONNECTION;          //average time at which a device disconnects (in seconds)
-    private int disconnectionBoundary = INIT_DISCONNECTION_BOUNDARY;  //maximum time at which a device disconnects (in seconds)
 
     private List<Device> devices;
     private Random random;
-
-    /////////////////////////////////////////////////////////////
 
     private Controller() {
         devices = generateDevices();
@@ -70,16 +66,8 @@ public class Controller {
     /*
      * GETTER and SETTER
      */
-    public int getMinDevices() {
-        return minDevices;
-    }
-
     public void setMinDevices(int minDevices) {
         this.minDevices = minDevices;
-    }
-
-    public int getMaxDevices() {
-        return maxDevices;
     }
 
     public void setMaxDevices(int maxDevices) {
@@ -92,18 +80,6 @@ public class Controller {
 
     public void setAvgDisconnection(int avgDisconnection) {
         this.avgDisconnection = avgDisconnection;
-    }
-
-    public int getDisconnectionBoundary() {
-        return disconnectionBoundary;
-    }
-
-    public void setDisconnectionBoundary(int disconnectionBoundary) {
-        if (disconnectionBoundary > avgDisconnection) {
-            this.disconnectionBoundary = disconnectionBoundary;
-        } else {
-            this.disconnectionBoundary = avgDisconnection;
-        }
     }
 
     /**
@@ -129,22 +105,19 @@ public class Controller {
             firstRand = random.nextInt(getAvgDisconnection()) + 1;
             secondRand = random.nextInt(getAvgDisconnection()) + 1;
 
-            if (device.getStatus() == true){
+            if (device.getStatus() == true) {
 
                 //Stay connected if time since initial connection hasn't exceeded the calculated value or boundary.
-                if (device.getConnectedAt().plusSeconds(firstRand * getAvgDisconnection() - secondRand).isAfter(LocalDateTime.now())
-                        && device.getConnectedAt().plusSeconds(getDisconnectionBoundary()).isAfter(LocalDateTime.now())) {
+                if (device.getConnectedAt().plusSeconds(firstRand * getAvgDisconnection() - secondRand).isAfter(LocalDateTime.now())) {
                     device.setLastSeen(LocalDateTime.now());
-                }
-                else {
+                } else {
                     device.setStatus(false);
                 }
 
-            }else {
+            } else {
 
                 //Reconnect device if enough time has past.
-                if (device.getLastSeen().plusSeconds(getAvgDisconnection() + firstRand - secondRand).isBefore(LocalDateTime.now())
-                        || device.getLastSeen().plusSeconds(getDisconnectionBoundary()).isBefore(LocalDateTime.now())) {
+                if (device.getLastSeen().plusSeconds(getAvgDisconnection() + firstRand - secondRand).isBefore(LocalDateTime.now())) {
                     device.setLastSeen(LocalDateTime.now());
                     device.setConnectedAt(LocalDateTime.now());
                     device.setStatus(true);

@@ -9,6 +9,6 @@
   <li role="presentation" [ngClass]="isDetailsViewActive()?'active':''" (click)="setDetailsActive(true)"><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> Details</a></li>
 </ul>
 
-<app-overview *ngIf="isOverviewActive()==true"></app-overview>
+<cc-overview *ngIf="isOverviewActive()==true"></cc-overview>
 
-<app-details *ngIf="isDetailsViewActive()==true"></app-details>
+<cc-details *ngIf="isDetailsViewActive()==true"></cc-details>

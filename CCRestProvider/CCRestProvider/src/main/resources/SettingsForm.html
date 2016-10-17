@@ -5,31 +5,27 @@
     <title>Settings CCRestProvider</title>
 </head>
 <body style="margin-top: 5%; font-family: Arial, Helvetica, sans-serif">
-    <form action="http://localhost:8081/ccrestprovider/rs/devices/settings" method="post">
-        <div style="display: table; margin: 0 auto">
-            <h1>Set up Dvices</h1>
-            <table>
-                <tr>
-                    <td>Number of Devices:</td>
-                    <td><input style="max-width: 100px" type="number" name="devices"></td>
-                </tr>
-            </table>
+<form action="http://localhost:8081/ccrestprovider/rs/devices/settings" method="post">
+    <div style="display: table; margin: 0 auto">
+        <h1>Set up Devices</h1>
+        <table>
+            <tr>
+                <td>Number of Devices:</td>
+                <td><input style="max-width: 100px" type="number" name="devices"></td>
+            </tr>
+        </table>
 
-            <h3>Time to next Disconnection:</h3>
-            <table>
-                <tr style="margin: 0px">
-                    <td>Avg.:</td>
-                    <td><input style="max-width: 100px" type="number" name="avgDisconnection"> sec</td>
-                </tr>
-                <tr>
-                    <td>Max.: </td>
-                    <td><input style="max-width: 100px" type="number" name="boundary"> sec</td>
-                </tr>
-            </table>
-            <button style="width: 200px; margin-top: 10px" type="submit" >Update</button>
+        <h3>Time to next Disconnection:</h3>
+        <table>
+            <tr style="margin: 0px">
+                <td>Avg.:</td>
+                <td><input style="max-width: 100px" type="number" name="avgDisconnection"> sec</td>
+            </tr>
+        </table>
+        <button style="width: 200px; margin-top: 10px" type="submit">Update</button>
 
 
-        </div>
-    </form>
+    </div>
+</form>
 </body>
 </html>

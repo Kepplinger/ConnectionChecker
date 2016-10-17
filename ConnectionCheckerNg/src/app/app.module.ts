@@ -12,6 +12,7 @@ import { NavbarComponent } from './gui/navbar/navbar.component';
 import { ViewComponent } from './gui/view/view.component';
 import { OverviewComponent } from './gui/view/overview/overview.component';
 import { DetailsComponent } from './gui/view/details/details.component';
+import { DeviceSingleComponent } from './devices/device-single.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DetailsComponent } from './gui/view/details/details.component';
     NavbarComponent,
     ViewComponent,
     OverviewComponent,
-    DetailsComponent
+    DetailsComponent,
+    DeviceSingleComponent
   ],
   imports: [
     BrowserModule,

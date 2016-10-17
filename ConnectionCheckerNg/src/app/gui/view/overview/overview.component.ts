@@ -7,7 +7,7 @@ import {HistoryItem} from "../../../classes/history-item";
 declare var google: any;
 
 @Component({
-  selector: 'app-overview',
+  selector: 'cc-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.css']
 })
@@ -28,6 +28,18 @@ export class OverviewComponent implements OnInit {
       });
   }
 
+  /**
+   * Gets called when the compnent is initialized.
+   */
+  ngOnInit() {
+    this.loadGoogleChart();
+  }
+
+  /**
+   * All devices get refreshed and redrawn.
+   * This function gets repeatedly called at a certain interval
+   * which is definded in the constructor.
+   */
   public updateDevices() {
     this.devices = this.deviceService.getDevices();
 
@@ -39,10 +51,10 @@ export class OverviewComponent implements OnInit {
     this.loadGoogleChart();
   }
 
-  ngOnInit() {
-    this.loadGoogleChart();
-  }
-
+  /**
+   * Initalizes the Google Charts when this function gets called th first time.
+   * Otherwise it just redraws the charts.
+   */
   loadGoogleChart() {
     if  (!OverviewComponent.googleLoaded) {
       OverviewComponent.googleLoaded = true;
@@ -51,6 +63,9 @@ export class OverviewComponent implements OnInit {
     google.charts.setOnLoadCallback(() => this.drawCharts());
   }
 
+  /**
+   * Draws the charts if all contions are met.
+   */
   drawCharts() {
     if (google != null && google.visualization != null && this.devices != null) {
       this.drawPieChart();
@@ -58,6 +73,9 @@ export class OverviewComponent implements OnInit {
     }
   }
 
+  /**
+   * Draws the pie chart.
+   */
   drawPieChart() {
 
     var data = new google.visualization.DataTable();
@@ -89,6 +107,9 @@ export class OverviewComponent implements OnInit {
     }
   }
 
+  /**
+   * Draws the line chart.
+   */
   drawLineChart() {
     if (this.history_onof.length > 0) {
 
@@ -124,10 +145,4 @@ export class OverviewComponent implements OnInit {
       }
     }
   }
-
-
-  checkloaded(): boolean {
-    return !((typeof google === 'undefined') || (typeof google.visualization === 'undefined'));
-  }
-
 }

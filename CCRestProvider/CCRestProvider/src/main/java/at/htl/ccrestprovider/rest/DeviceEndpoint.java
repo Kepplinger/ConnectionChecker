@@ -13,26 +13,25 @@ import java.util.List;
  */
 @Path("devices")
 public class DeviceEndpoint {
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Device> getDevices(){
+    public List<Device> getDevices() {
         return Controller.getInstance().getDevices();
     }
 
     @POST
     @Path("settings")
     public Response setConfig(@FormParam("avgDisconnection") int avgDisconnection,
-                              @FormParam("boundary") int boundary,
                               @FormParam("devices") int devices) {
 
         Controller.getInstance().setAvgDisconnection(avgDisconnection);
-        Controller.getInstance().setDisconnectionBoundary(boundary);
         Controller.getInstance().setMinDevices(devices);
         Controller.getInstance().setMaxDevices(devices);
         Controller.getInstance().createNewDeviceList();
 
-        System.out.println(String.format("Settings changed to:\nDevices: %d, AVGDisc: %d, Boundry: %d",devices,avgDisconnection,boundary));
+        System.out.println(String.format("Settings changed to:\nDevices: %d, AVGDisc: %d", devices, avgDisconnection));
 
-        return Response.status(200).entity(String.format("Settings changed to:\nDevices: %d, AVGDisc: %d, Boundry: %d",devices,avgDisconnection,boundary)).build();
+        return Response.status(200).entity(String.format("Settings changed to:\nDevices: %d, AVGDisc: %d", devices, avgDisconnection)).build();
     }
 }
