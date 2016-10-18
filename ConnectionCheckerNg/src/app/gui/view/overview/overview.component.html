@@ -16,8 +16,8 @@
           <!-- Pie Chart -->
           <div class="col-md-3">
             <div class="col-md-12 panel panel-default">
-              <h3>Devices Connection Average</h3>
-              <div id="onof_chart" style="height: auto"><img ng-src="../../loading.gif"></div>
+              <h3 class="chartTitle">Average Device Connection State</h3>
+              <div id="onof_chart" class="center-block"><img src="../../loading.gif"></div>
             </div>
           </div>
           <!-- end of Pie Chart -->
@@ -26,23 +26,29 @@
           <div class="col-md-9 panel panel-default">
             <div class="col-md-12">
               <div class="row">
-                <h3>Devices Connection History
-                  <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-cog" aria-hidden="true"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Show last 5min</a></li>
-                      <li><a href="#">Show last 1 hour</a></li>
-                      <li><a href="#">Show last 7 days</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">Show all</a></li>
-                    </ul>
+                <h3><span class="chartTitle">Device Connection State History</span>
+                  <div class="input-group pull-right col-md-3">
+                    <span class="input-group-addon" id="sizing-addon2">Shown Range </span>
+                    <input type="number" class="form-control" aria-label="...">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-default">-----</button>
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#">sec</a></li>
+                        <li><a href="#">min</a></li>
+                        <li><a href="#">hour</a></li>
+                        <li><a href="#">days</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">all</a></li>
+                      </ul>
+                    </div>
                   </div>
                 </h3>
               </div>
-              <div id="history_onof_chart" style="height: auto"><img ng-src="../../loading.gif"></div>
+              <div id="history_onof_chart" class="center-block"><img src="../../loading.gif"></div>
             </div>
           </div>
           <!-- end of Line Chart -->

@@ -97,7 +97,8 @@ export class OverviewComponent implements OnInit {
 
     // Set chart options
     var options = {
-      colors: ['#5cb85c', '#d9534f']
+      colors: ['#5cb85c', '#d9534f'],
+      height: 350
     };
 
     if (document.getElementById('onof_chart') != null) {
@@ -135,7 +136,8 @@ export class OverviewComponent implements OnInit {
         vAxis: {
           maxValue: this.devices.length,
           minValue: 0
-        }
+        },
+        height: 350
       };
 
       if (document.getElementById('history_onof_chart') != null) {
