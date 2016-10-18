@@ -19,16 +19,36 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
   <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <style>
+    /*for the loading screen*/
+    .container-table {
+      display: table;
+    }
+    .vertical-center-row {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    /*for the loading screen*/
+  </style>
 </head>
 <body>
 <cc-root>
   <div style="text-align: center">
     <br>
     <br>
-    <h1 style="color: orangered;font-weight: 900">Connection Checker</h1>
     <br>
-    <img src="app/gui/loading.gif" height="128px">
-    <h3 style="color: #949494;">Loading</h3>
+    <br>
+    <div class="container container-table">
+      <div class="row vertical-center-row">
+        <div class="text-center col-md-4 col-md-offset-4" >
+          <h1 style="color: orangered;font-weight: 900;font-family: 'Righteous', cursive;">Connection Checker</h1>
+          <br>
+          <img src="app/gui/loading.gif" height="128px">
+          <h3 style="color: #949494;">Loading</h3>
+        </div>
+      </div>
+    </div>
   </div>
 </cc-root>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

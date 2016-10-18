@@ -1,12 +1,21 @@
 <div class="col-md-12">
   <div class="col-md-12">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 hidden-xs">
         <h3 style="text-align: center">
           <span class="label label-primary">Total <span class="badge">{{online+offline}}</span></span>
           <span class="label label-danger">Offline <span class="badge">{{offline}}</span></span>
           <span class="label label-success">Online <span class="badge">{{online}}</span></span>
         </h3>
+      </div>
+      <div class="col-md-12 visible-xs">
+        <div class="row">
+          <div class="col-xs-6"><h4 style="text-align: center"><span class="label label-primary">Total <span class="badge">{{online+offline}}</span></span></h4></div>
+          <div class="col-xs-6">
+            <h4 style="text-align: center"><span class="label label-danger">Offline <span class="badge">{{offline}}</span></span></h4>
+            <h4 style="text-align: center"><span class="label label-success">Online <span class="badge">{{online}}</span></span></h4>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -26,7 +35,12 @@
           <div class="col-md-9 panel panel-default">
             <div class="col-md-12">
               <div class="row">
-                <h3><span class="chartTitle">Device Connection State History</span>
+                <div class="col-md-3">
+                  <h3><span class="chartTitle">Device Connection State History</span></h3>
+                </div>
+                <div class="col-md-9">
+                  <!-- Settings for Area chart -->
+                  <br>
                   <div class="input-group pull-right col-md-3">
                     <span class="input-group-addon" id="sizing-addon2">Shown Range </span>
                     <input type="number" class="form-control" aria-label="...">
@@ -46,7 +60,8 @@
                       </ul>
                     </div>
                   </div>
-                </h3>
+                  <!-- Settings for Area chart -->
+                </div>
               </div>
               <div id="history_onof_chart" class="center-block"><img src="../../loading.gif"></div>
             </div>

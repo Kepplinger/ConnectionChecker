@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    //document.getElementById('settings_serverURL').textContent = ;
+  }
 
   ngOnInit() {
   }

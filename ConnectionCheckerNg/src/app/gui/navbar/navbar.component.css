@@ -1,0 +1,9 @@
+.back-to-top {
+  margin: 0;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  z-index: 100;
+  text-decoration: none;
+  color: #ff9000;
+}

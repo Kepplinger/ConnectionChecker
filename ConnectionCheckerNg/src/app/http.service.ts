@@ -12,11 +12,15 @@ export class HttpService {
 
   @Output() error = new EventEmitter<string>();
 
-  constructor(private http: Http) { }
+  private serverURL;
+
+  constructor(private http: Http) {
+    this.serverURL = "http://localhost:8081/ccrestprovider/rs/devices";
+  }
 
   getData() {
     this.onLastUpdate();
-    return this.http.get("http://localhost:8081/ccrestprovider/rs/devices")   //Reads the data from the specified URL.
+    return this.http.get(this.serverURL)   //Reads the data from the specified URL.
       .map((response: Response) => <Device[]> response.json())      //Maps the data from an observable http response to an smaller observable json object.
       .catch((error:any) => this.onError(error));
   }
@@ -32,5 +36,9 @@ export class HttpService {
     var mm = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes();
     var ss = (date.getSeconds() < 10) ? "0" + date.getSeconds() : date.getSeconds();
     this.lastUpdate.emit(hh+":"+mm+":"+ss);
+  }
+
+  getServerURL(){
+    return this.serverURL;
   }
 }
