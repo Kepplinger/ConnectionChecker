@@ -8,7 +8,7 @@ import {Device} from "../../../classes/device";
 })
 export class DetailsComponent {
 
-  private selectedDevice: Device;
+  private selectedDevice: Device; //the current selected device
 
   constructor() {
   }

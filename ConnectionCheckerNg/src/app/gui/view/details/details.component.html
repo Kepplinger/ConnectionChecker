@@ -1,12 +1,13 @@
 <br>
 <div class="row">
   <div class="col-md-12">
+
+    <!--List of all Devices-->
     <div class="col-md-2">
-      <cc-device-list (selectedDevice)="setSelectedDevice($event)"></cc-device-list>
-      <br>
-      <br>
+      <cc-device-list (selectedDeviceEmitter)="setSelectedDevice($event)"></cc-device-list>
     </div>
 
+    <!--Details of the current selected Device-->
     <div class="col-md-10" id="detail-container">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -17,5 +18,6 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
