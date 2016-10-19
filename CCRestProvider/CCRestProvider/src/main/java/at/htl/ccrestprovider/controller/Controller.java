@@ -62,7 +62,6 @@ public class Controller {
         return new Device(name);
     }
 
-
     /*
      * GETTER and SETTER
      */
