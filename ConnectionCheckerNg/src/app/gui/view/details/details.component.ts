@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+
 import {Device} from "../../../classes/device";
 
 @Component({
@@ -13,7 +14,7 @@ export class DetailsComponent {
   constructor() {
   }
 
-  public setSelectedDevice(device: Device){
+  public setSelectedDevice(device: Device) {
     if (device != null) {
       this.selectedDevice = device;
     }

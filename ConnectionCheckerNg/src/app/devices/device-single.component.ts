@@ -16,15 +16,14 @@ export class DeviceSingleComponent {
 
   @Input('device') device: Device;  //current selected device
 
-  constructor() {
-  }
+  constructor() { }
 
   /**
    * Returns a formatted date string for the html view.
    * @param date
    * @returns {string}
    */
-  getTimeString(date: LocalDateTime): string {
+  private getTimeString(date: LocalDateTime): string {
     return FormatService.getTimeString(date);
   }
 

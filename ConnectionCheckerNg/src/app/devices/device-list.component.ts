@@ -14,7 +14,6 @@ import {LocalDateTime} from "../classes/local-date-time";
 export class DeviceListComponent {
 
   @Output() selectedDeviceEmitter = new EventEmitter<Device>();
-  private selectedDevice: Device;
   private selectedIndex = 0;
   private devices: Device[];
 
@@ -31,7 +30,6 @@ export class DeviceListComponent {
     this.updateDevices();
 
     if (this.devices.length > 0) {
-      this.selectedDevice = this.devices[0];
       this.selectedIndex = 0;
     }
   }
@@ -42,7 +40,7 @@ export class DeviceListComponent {
    */
   public updateDevices() {
     this.devices = this.deviceService.getDevices();
-    this.selectedDeviceEmitter.emit(this.selectedDevice);
+    this.selectedDeviceEmitter.emit(this.devices[this.selectedIndex]);
   }
 
   /**
@@ -51,7 +49,6 @@ export class DeviceListComponent {
    * @param index
    */
   public onSelect(device: Device, index: number) {
-    this.selectedDevice = device;
     this.selectedIndex = index;
     this.selectedDeviceEmitter.emit(device);
   }
@@ -61,7 +58,7 @@ export class DeviceListComponent {
    * @param date
    * @returns {string}
    */
-  getTimeString(date: LocalDateTime): string {
+  private getTimeString(date: LocalDateTime): string {
     return FormatService.getTimeString(date);
   }
 
@@ -70,7 +67,7 @@ export class DeviceListComponent {
    * @param device
    * @returns {string}
    */
-  getColor(device: Device): string {
+  private getColor(device: Device): string {
 
     if (device.status == true) {
       return 'limegreen';
