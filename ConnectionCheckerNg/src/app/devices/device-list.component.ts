@@ -4,7 +4,7 @@ import {Device} from "../classes/device";
 import {DeviceService} from "./device.service";
 import {Observable} from "rxjs";
 import {FormatService} from "../util/format.service";
-import {LocalDateTime} from "../classes/local-date-time";
+import {DateTime} from "../classes/date-time";
 
 @Component({
   selector: 'cc-device-list',
@@ -49,6 +49,7 @@ export class DeviceListComponent {
    * @param index
    */
   public onSelect(device: Device, index: number) {
+    console.log("select");
     this.selectedIndex = index;
     this.selectedDeviceEmitter.emit(device);
   }
@@ -58,7 +59,7 @@ export class DeviceListComponent {
    * @param date
    * @returns {string}
    */
-  private getTimeString(date: LocalDateTime): string {
+  private getTimeString(date: DateTime): string {
     return FormatService.getTimeString(date);
   }
 

@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 
 import {HttpService} from "../http.service";
 import {Device} from "../classes/device";
-import {LocalDateTime} from "../classes/local-date-time";
+import {DateTime} from "../classes/date-time";
 import {forEach} from "@angular/router/src/utils/collection";
 
 /**

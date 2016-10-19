@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 
-import {LocalDateTime} from "../classes/local-date-time";
+import {DateTime} from "../classes/date-time";
 
 @Injectable()
 export class FormatService {
 
   /** Returns a formatted date string. */
-  public static getTimeString(dateTime: LocalDateTime): string {
+  public static getTimeString(dateTime: DateTime): string {
     if (dateTime != null) {
-      return this.pad(dateTime.dayOfMonth, 2) + "." +
-        this.pad(dateTime.monthValue, 2) + "." +
+      return this.pad(dateTime.day, 2) + "." +
+        this.pad(dateTime.month, 2) + "." +
         this.pad(dateTime.year, 4) + " " +
         this.pad(dateTime.hour, 2) + ":" +
         this.pad(dateTime.minute, 2) + ":" +

@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 import {Device} from "../classes/device";
-import {LocalDateTime} from "../classes/local-date-time";
+import {DateTime} from "../classes/date-time";
 import {FormatService} from "../util/format.service";
 
 /**
@@ -23,7 +23,7 @@ export class DeviceSingleComponent {
    * @param date
    * @returns {string}
    */
-  private getTimeString(date: LocalDateTime): string {
+  private getTimeString(date: DateTime): string {
     return FormatService.getTimeString(date);
   }
 
