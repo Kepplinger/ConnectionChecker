@@ -13,6 +13,7 @@ import { ViewComponent } from './gui/view/view.component';
 import { OverviewComponent } from './gui/view/overview/overview.component';
 import { DetailsComponent } from './gui/view/details/details.component';
 import { DeviceSingleComponent } from './devices/device-single.component';
+import {HistoryService} from "./classes/history.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { DeviceSingleComponent } from './devices/device-single.component';
     FormsModule,
     HttpModule
   ],
-  providers: [HttpService, DeviceService, FormatService],
+  providers: [HttpService, DeviceService, FormatService, HistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

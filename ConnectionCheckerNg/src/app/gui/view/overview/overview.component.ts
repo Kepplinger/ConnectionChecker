@@ -3,6 +3,9 @@ import {Device} from "../../../classes/device";
 import {DeviceService} from "../../../devices/device.service";
 import {Observable} from "rxjs";
 import {HistoryItem} from "../../../classes/history-item";
+import {HistoryUtil} from "../../../classes/historyUtil";
+import {Input} from "@angular/core/src/metadata/directives";
+import {HistoryService} from "../../../classes/history.service";
 
 declare var google: any;
 
@@ -19,9 +22,25 @@ export class OverviewComponent implements OnInit {
   private offline: number;
   private online: number;
 
-  private history_onof: HistoryItem[] = [];
+  //Chart settings Area chart
+  private static ac_set_time:number = 1;
+  private static ac_set_unit:string = "all";
 
-  constructor(private deviceService: DeviceService) {
+  setAcSetTime(time:number){
+    OverviewComponent.ac_set_time = time;
+  }
+  setAcTimeUnit(unit:string){
+    OverviewComponent.ac_set_unit = unit;
+  }
+  getAcTimeUnit(){
+    return OverviewComponent.ac_set_unit;
+  }
+  getAcTime(){
+    return OverviewComponent.ac_set_time;
+  }
+  //END chart settings area chart
+
+  constructor(private deviceService: DeviceService,private historyService:HistoryService) {
     Observable.interval(1000)
       .subscribe(() => {
         this.updateDevices();
@@ -47,7 +66,7 @@ export class OverviewComponent implements OnInit {
     this.online = this.deviceService.getOnlineDevices();
 
     var item = new HistoryItem(this.deviceService.getLastUpdate(), [this.offline, this.online]);
-    this.history_onof.push(item);
+    this.historyService.addItemToTotalHistoryOnOff(item);
     this.loadGoogleChart();
   }
 
@@ -83,10 +102,10 @@ export class OverviewComponent implements OnInit {
     data.addColumn('number', 'Status');
 
     var on = 0, off = 0;
-    for (var i = 0; i < this.history_onof.length; i++) {
-      if (this.history_onof[i] != null) {
-        on += this.history_onof[i].getData()[1];
-        off += this.history_onof[i].getData()[0];
+    for (var i = 0; i < this.historyService.getTotalHistoryOnOff().length; i++) {
+      if (this.historyService.getTotalHistoryOnOff()[i] != null) {
+        on += this.historyService.getTotalHistoryOnOff()[i].getData()[1];
+        off += this.historyService.getTotalHistoryOnOff()[i].getData()[0];
       }
     }
 
@@ -112,7 +131,7 @@ export class OverviewComponent implements OnInit {
    * Draws the line chart.
    */
   drawLineChart() {
-    if (this.history_onof.length > 0) {
+    if (this.historyService.getTotalHistoryOnOff().length > 0) {
 
       //return;
       var data = new google.visualization.DataTable();
@@ -120,12 +139,14 @@ export class OverviewComponent implements OnInit {
       data.addColumn('number', 'Offline');
       data.addColumn('number', 'Online');
 
-      for (var i = 0; i < this.history_onof.length; i++) {
-        if (this.history_onof[i] != null) {
+
+      var predata = HistoryUtil.getLatest(this.historyService.getTotalHistoryOnOff(),this.getAcTime(),this.getAcTimeUnit());
+      for (var i = 0; i < predata.length; i++) {
+        if (predata[i] != null) {
           var ba = [
-            this.history_onof[i].getTime(),
-            this.history_onof[i].getData()[1],
-            this.history_onof[i].getData()[0]
+            predata[i].getTime(),
+            predata[i].getData()[1],
+            predata[i].getData()[0]
           ];
           data.addRow(ba);
         }
@@ -139,6 +160,7 @@ export class OverviewComponent implements OnInit {
         },
         height: 350
       };
+
 
       if (document.getElementById('history_onof_chart') != null) {
         // Instantiate and draw our chart, passing in some options.

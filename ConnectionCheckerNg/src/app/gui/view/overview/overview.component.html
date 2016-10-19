@@ -9,13 +9,11 @@
         </h3>
       </div>
       <div class="col-md-12 visible-xs">
-        <div class="row">
-          <div class="col-xs-6"><h4 style="text-align: center"><span class="label label-primary">Total <span class="badge">{{online+offline}}</span></span></h4></div>
-          <div class="col-xs-6">
-            <h4 style="text-align: center"><span class="label label-danger">Offline <span class="badge">{{offline}}</span></span></h4>
-            <h4 style="text-align: center"><span class="label label-success">Online <span class="badge">{{online}}</span></span></h4>
-          </div>
-        </div>
+        <h4 style="text-align: center">
+          <span class="label label-primary">Total <span class="badge">{{online+offline}}</span></span>
+          <span class="label label-danger">Offline <span class="badge">{{offline}}</span></span>
+          <span class="label label-success">Online <span class="badge">{{online}}</span></span>
+        </h4>
       </div>
     </div>
     <div class="row">
@@ -35,28 +33,28 @@
           <div class="col-md-9 panel panel-default">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <h3><span class="chartTitle">Device Connection State History</span></h3>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8">
                   <!-- Settings for Area chart -->
                   <br>
                   <div class="input-group pull-right col-md-3">
-                    <span class="input-group-addon" id="sizing-addon2">Shown Range </span>
-                    <input type="number" class="form-control" aria-label="...">
+                    <span class="input-group-addon">Shown Range </span>
+                    <input type="number" class="form-control" aria-label="..." style="min-width: 70px" (change)="setAcSetTime($event.target.value)" value="{{getAcTime()}}" min="1">
+                    <span class="input-group-addon">{{getAcTimeUnit()}}</span>
                     <div class="input-group-btn">
-                      <button type="button" class="btn btn-default">-----</button>
                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="caret"></span>
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="#">sec</a></li>
-                        <li><a href="#">min</a></li>
-                        <li><a href="#">hour</a></li>
-                        <li><a href="#">days</a></li>
+                        <li><a  (click)="setAcTimeUnit('sec')">sec</a></li>
+                        <li><a (click)="setAcTimeUnit('min')">min</a></li>
+                        <li><a (click)="setAcTimeUnit('hour')">hour</a></li>
+                        <li><a  (click)="setAcTimeUnit('days')">days</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">all</a></li>
+                        <li><a  (click)="setAcTimeUnit('all')">all</a></li>
                       </ul>
                     </div>
                   </div>
