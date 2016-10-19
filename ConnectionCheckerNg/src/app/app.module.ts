@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { FormatService } from "./util/format.service";
 import { AppComponent } from './app.component';
-import { HttpService } from "./http.service";
+import { HttpService } from "./util/http.service";
 import { DeviceService } from "./devices/device.service";
 import { DeviceListComponent } from './devices/device-list.component';
 import { NavbarComponent } from './gui/navbar/navbar.component';

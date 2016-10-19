@@ -1,9 +1,10 @@
 import { Injectable, OnInit } from '@angular/core';
 
-import {HttpService} from "../http.service";
+import {HttpService} from "../util/http.service";
 import {Device} from "../classes/device";
-import {LocalDateTime} from "../classes/local-date-time";
+import {DateTime} from "../classes/date-time";
 import {forEach} from "@angular/router/src/utils/collection";
+import {FormatService} from "../util/format.service";
 
 /**
  * This class is in possession of the device list
@@ -20,7 +21,7 @@ export class DeviceService {
   /**
    * Reads the data from the observable in an array.
    */
-  updateDevices(){
+  private updateDevices(): void{
     this.httpService.getData()
       .subscribe(
         (data: Device[]) => this.devices = data
@@ -32,7 +33,7 @@ export class DeviceService {
    * Updates the list of devices and returns it.
    * @returns {Device[]}
    */
-  getDevices() {
+  public getDevices(): Device[] {
     this.updateDevices();
     return this.devices;
   }
@@ -41,7 +42,7 @@ export class DeviceService {
    * Returns the number of online devices.
    * @returns {number}
    */
-  getOnlineDevices():number{
+  public getOnlineDevices():number{
     if(this.devices!=null){
       var res = 0;
       for(var i = 0;i<this.devices.length;i++){
@@ -59,7 +60,7 @@ export class DeviceService {
    * Returns the number of offline devices.
    * @returns {number}
    */
-  getOfflineDevices():number{
+  public getOfflineDevices():number{
     if(this.devices!=null)
       return this.devices.length-this.getOnlineDevices();
     else
@@ -70,7 +71,7 @@ export class DeviceService {
    * Returns the time when the list was last updated.
    * @returns {Date}
    */
-  getLastUpdate():Date{
+  public getLastUpdate():Date{
     return this.lastUpdate;
   }
 

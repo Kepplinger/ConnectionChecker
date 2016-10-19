@@ -1,4 +1,4 @@
-import {LocalDateTime} from "./local-date-time";
+import {DateTime} from "./date-time";
 
 /**
  * A list of devices are recived at a certain interval using
@@ -6,7 +6,7 @@ import {LocalDateTime} from "./local-date-time";
  */
 export class Device {
   constructor(public name: string,
-              public lastSeen: LocalDateTime,
+              public lastSeen: DateTime,
               public status : boolean)
   { }
 }

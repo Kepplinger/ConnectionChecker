@@ -1,15 +1,13 @@
 package at.htl.ccrestprovider.model;
 
-import java.time.LocalDateTime;
-
 /**
  * Created by Andreas on 12.10.2016.
  */
 public class Device {
 
     private String name;
-    private LocalDateTime lastSeen;
-    private LocalDateTime connectedAt;
+    private DateTime lastSeen;
+    private DateTime connectedAt;
     private boolean status;
 
     public Device() {
@@ -17,20 +15,20 @@ public class Device {
 
     public Device(String name) {
         this.name = name;
-        this.lastSeen = LocalDateTime.now();
-        this.connectedAt = LocalDateTime.now();
+        this.lastSeen = DateTime.now();
+        this.connectedAt = DateTime.now();
         this.status = true;
     }
 
-    public LocalDateTime getConnectedAt() {
+    public DateTime getConnectedAt() {
         return connectedAt;
     }
 
-    public void setConnectedAt(LocalDateTime connectedAt) {
+    public void setConnectedAt(DateTime connectedAt) {
         this.connectedAt = connectedAt;
     }
 
-    public LocalDateTime getLastSeen() {
+    public DateTime getLastSeen() {
         return lastSeen;
     }
 
@@ -38,7 +36,7 @@ public class Device {
         return name;
     }
 
-    public void setLastSeen(LocalDateTime lastSeen) {
+    public void setLastSeen(DateTime lastSeen) {
         this.lastSeen = lastSeen;
     }
 
@@ -53,8 +51,4 @@ public class Device {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    //    public boolean getStatus() {
-//        return lastSeen.isAfter(LocalDateTime.now().minusSeconds(2)) ? true : false;
-//    }
 }

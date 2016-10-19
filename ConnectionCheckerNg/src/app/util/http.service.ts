@@ -1,6 +1,6 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Response} from "@angular/http";
-import {Device} from "./classes/device";
+import {Device} from "../classes/device";
 import {Observable} from "rxjs";
 import 'rxjs/Rx';
 import {Output} from "@angular/core/src/metadata/directives";
@@ -12,13 +12,13 @@ export class HttpService {
 
   @Output() error = new EventEmitter<string>();
 
-  private serverURL;
+  private serverURL = "";
 
   constructor(private http: Http) {
     this.serverURL = "http://localhost:8081/ccrestprovider/rs/devices";
   }
 
-  getData() {
+  public getData() {
     this.onLastUpdate();
     return this.http.get(this.serverURL)   //Reads the data from the specified URL.
       .map((response: Response) => <Device[]> response.json())      //Maps the data from an observable http response to an smaller observable json object.
@@ -26,7 +26,7 @@ export class HttpService {
   }
 
   onError(error:any):any{
-    this.error.emit("Connection Error: (REST Service)");
+    this.error.emit("Connection Error: (REST Service: " + this.serverURL + ")");
     return Observable.throw(error.json().error || 'Server error');
   }
 
@@ -36,9 +36,5 @@ export class HttpService {
     var mm = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes();
     var ss = (date.getSeconds() < 10) ? "0" + date.getSeconds() : date.getSeconds();
     this.lastUpdate.emit(hh+":"+mm+":"+ss);
-  }
-
-  getServerURL(){
-    return this.serverURL;
   }
 }

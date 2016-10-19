@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import {HttpService} from "./http.service";
+import {Component} from '@angular/core';
+
+import {HttpService} from "./util/http.service";
 
 @Component({
   selector: 'cc-root',
@@ -7,9 +8,10 @@ import {HttpService} from "./http.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private errorData:string;
-  constructor(private httpService:HttpService) {
-      httpService.error.subscribe(item=>this.errorData = item);
+  private errorData: string;
+
+  constructor(private httpService: HttpService) {
+    httpService.error.subscribe(item=>this.errorData = item);
   }
 
 }

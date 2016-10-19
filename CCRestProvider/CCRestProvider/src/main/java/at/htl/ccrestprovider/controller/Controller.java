@@ -1,8 +1,8 @@
 package at.htl.ccrestprovider.controller;
 
+import at.htl.ccrestprovider.model.DateTime;
 import at.htl.ccrestprovider.model.Device;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -108,8 +108,8 @@ public class Controller {
             if (device.getStatus() == true) {
 
                 //Stay connected if time since initial connection hasn't exceeded the calculated value or boundary.
-                if (device.getConnectedAt().plusSeconds(firstRand * getAvgDisconnection() - secondRand).isAfter(LocalDateTime.now())) {
-                    device.setLastSeen(LocalDateTime.now());
+                if (device.getConnectedAt().plusSeconds(firstRand * getAvgDisconnection() - secondRand).isAfter(DateTime.now())) {
+                    device.setLastSeen(DateTime.now());
                 } else {
                     device.setStatus(false);
                 }
@@ -117,9 +117,9 @@ public class Controller {
             } else {
 
                 //Reconnect device if enough time has past.
-                if (device.getLastSeen().plusSeconds(getAvgDisconnection() + firstRand - secondRand).isBefore(LocalDateTime.now())) {
-                    device.setLastSeen(LocalDateTime.now());
-                    device.setConnectedAt(LocalDateTime.now());
+                if (device.getLastSeen().plusSeconds(getAvgDisconnection() + firstRand - secondRand).isBefore(DateTime.now())) {
+                    device.setLastSeen(DateTime.now());
+                    device.setConnectedAt(DateTime.now());
                     device.setStatus(true);
                 }
             }
