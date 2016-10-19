@@ -3,7 +3,9 @@ package at.htl.ccrestprovider.model;
 import java.time.LocalDateTime;
 
 /**
- * Created by kepplinger on 19.10.16.
+ * This class stores the current date and time.
+ * It also has some convenient functions which are useful for
+ * the disconnection algorithm.
  */
 public class DateTime {
 
@@ -21,9 +23,9 @@ public class DateTime {
         this.day = dateTime.getDay();
         this.month = dateTime.getMonth();
         this.year = dateTime.getYear();
-        this.hour = dateTime.getHours();
-        this.minute = dateTime.getMinutes();
-        this.second = dateTime.getSeconds();
+        this.hour = dateTime.getHour();
+        this.minute = dateTime.getMinute();
+        this.second = dateTime.getSecond();
     }
 
     public DateTime(int day, int month, int year, int hour, int minute, int second) {
@@ -47,48 +49,40 @@ public class DateTime {
         return year;
     }
 
-    public int getHours() {
+    public int getHour() {
         return hour;
     }
 
-    public int getMinutes() {
+    public int getMinute() {
         return minute;
     }
 
-    public int getSeconds() {
+    public int getSecond() {
         return second;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setHours(int hour) {
-        this.hour = hour;
-    }
-
-    public void setMinutes(int minute) {
-        this.minute = minute;
     }
 
     public void setSeconds(int second) {
         this.second = second;
     }
 
+    /**
+     * Returns a new DateTime object and adds the given seconds to its current time.
+     *
+     * @param secondsToAdd
+     * @return DateTime
+     */
     public DateTime plusSeconds(int secondsToAdd) {
         DateTime dateTime = new DateTime(this);
-        dateTime.setSeconds(dateTime.getSeconds() + secondsToAdd);
+        dateTime.setSeconds(dateTime.getSecond() + secondsToAdd);
         return dateTime;
     }
 
+    /**
+     * Checks if given DateTime is after the current instance.
+     *
+     * @param dateTime
+     * @return boolean
+     */
     public boolean isAfter(DateTime dateTime) {
         if (year > dateTime.getYear()) {
             return true;
@@ -98,14 +92,14 @@ public class DateTime {
             } else if (month == dateTime.getMonth()) {
                 if (day > dateTime.getDay()) {
                     return true;
-                } else if (day == dateTime.getDay()){
-                    if (hour > dateTime.getHours()) {
+                } else if (day == dateTime.getDay()) {
+                    if (hour > dateTime.getHour()) {
                         return true;
-                    } else if (hour == dateTime.getHours()) {
-                        if (minute > dateTime.getMinutes()) {
+                    } else if (hour == dateTime.getHour()) {
+                        if (minute > dateTime.getMinute()) {
                             return true;
-                        } else if (minute == dateTime.getMinutes()) {
-                            if (second > dateTime.getSeconds()) {
+                        } else if (minute == dateTime.getMinute()) {
+                            if (second > dateTime.getSecond()) {
                                 return true;
                             } else {
                                 return false;
@@ -118,7 +112,13 @@ public class DateTime {
         return false;
     }
 
-    public boolean isBefore(DateTime dateTime){
+    /**
+     * Checks if given DateTime is before the current instance.
+     *
+     * @param dateTime
+     * @return boolean
+     */
+    public boolean isBefore(DateTime dateTime) {
         if (year < dateTime.getYear()) {
             return true;
         } else if (year == dateTime.getYear()) {
@@ -127,14 +127,14 @@ public class DateTime {
             } else if (month == dateTime.getMonth()) {
                 if (day < dateTime.getDay()) {
                     return true;
-                } else if (day == dateTime.getDay()){
-                    if (hour < dateTime.getHours()) {
+                } else if (day == dateTime.getDay()) {
+                    if (hour < dateTime.getHour()) {
                         return true;
-                    } else if (hour == dateTime.getHours()) {
-                        if (minute < dateTime.getMinutes()) {
+                    } else if (hour == dateTime.getHour()) {
+                        if (minute < dateTime.getMinute()) {
                             return true;
-                        } else if (minute == dateTime.getMinutes()) {
-                            if (second < dateTime.getSeconds()) {
+                        } else if (minute == dateTime.getMinute()) {
+                            if (second < dateTime.getSecond()) {
                                 return true;
                             } else {
                                 return false;
@@ -147,6 +147,11 @@ public class DateTime {
         return false;
     }
 
+    /**
+     * Returns the current time in the DateTime format.
+     *
+     * @return DateTime
+     */
     public static DateTime now() {
 
         LocalDateTime localDateTime = LocalDateTime.now();

@@ -1,6 +1,6 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Response} from "@angular/http";
-import {Device} from "./classes/device";
+import {Device} from "../classes/device";
 import {Observable} from "rxjs";
 import 'rxjs/Rx';
 import {Output} from "@angular/core/src/metadata/directives";

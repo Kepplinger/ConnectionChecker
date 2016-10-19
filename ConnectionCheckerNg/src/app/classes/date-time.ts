@@ -1,3 +1,6 @@
+/**
+ * This class stores date and time.
+ */
 export class DateTime {
 
   constructor(public day: number,

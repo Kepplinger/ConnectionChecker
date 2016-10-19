@@ -49,7 +49,6 @@ export class DeviceListComponent {
    * @param index
    */
   public onSelect(device: Device, index: number) {
-    console.log("select");
     this.selectedIndex = index;
     this.selectedDeviceEmitter.emit(device);
   }

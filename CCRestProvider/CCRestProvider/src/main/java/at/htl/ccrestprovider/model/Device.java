@@ -1,7 +1,5 @@
 package at.htl.ccrestprovider.model;
 
-import java.time.LocalDateTime;
-
 /**
  * Created by Andreas on 12.10.2016.
  */

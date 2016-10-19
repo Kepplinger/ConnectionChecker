@@ -3,7 +3,6 @@ package at.htl.ccrestprovider.controller;
 import at.htl.ccrestprovider.model.DateTime;
 import at.htl.ccrestprovider.model.Device;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
