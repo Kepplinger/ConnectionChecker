@@ -18,6 +18,8 @@ export class OverviewComponent implements OnInit {
 
   private static googleLoaded: boolean;
 
+  private imgPath = '../../../../resources/loading.gif';
+
   private devices: Device[];
   private offline: number;
   private online: number;
@@ -65,8 +67,11 @@ export class OverviewComponent implements OnInit {
     this.offline = this.deviceService.getOfflineDevices();
     this.online = this.deviceService.getOnlineDevices();
 
+    //Add history item to "timeline"
     var item = new HistoryItem(this.deviceService.getLastUpdate(), [this.offline, this.online]);
     this.historyService.addItemToTotalHistoryOnOff(item);
+
+    //Load Chart
     this.loadGoogleChart();
   }
 
@@ -140,7 +145,9 @@ export class OverviewComponent implements OnInit {
       data.addColumn('number', 'Online');
 
 
+      //Data filter
       var predata = HistoryUtil.getLatest(this.historyService.getTotalHistoryOnOff(),this.getAcTime(),this.getAcTimeUnit());
+
       for (var i = 0; i < predata.length; i++) {
         if (predata[i] != null) {
           var ba = [
